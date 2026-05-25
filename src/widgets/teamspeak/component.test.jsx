@@ -61,4 +61,35 @@ describe("widgets/nextcloud/component", () => {
     expect(screen.getByText("teamspeak.uptime")).toBeInTheDocument();
     expect(screen.getByText("77743")).toBeInTheDocument();
   });
+  it("serverError returns error", () => {
+    useWidgetAPI.mockReturnValue({
+      data: undefined,
+      error: "some error",
+    });
+
+    const service = {
+      widget: { type: "teamspeak" },
+    };
+
+    const { container } = renderWithProviders(<Component service={service} />, { settings: { hideErrors: false } });
+
+    expect(screen.getByText("some error")).toBeInTheDocument();
+  });
+  it("undefined response returns empty template", () => {
+    useWidgetAPI.mockReturnValue({
+      data: undefined,
+      error: undefined,
+    });
+
+    const service = {
+      widget: { type: "teamspeak" },
+    };
+
+    const { container } = renderWithProviders(<Component service={service} />, { settings: { hideErrors: false } });
+
+    expect(screen.getByText("teamspeak.name")).toBeInTheDocument();
+    expect(screen.getByText("teamspeak.activeusers")).toBeInTheDocument();
+    expect(screen.getByText("teamspeak.status")).toBeInTheDocument();
+    expect(screen.getByText("teamspeak.uptime")).toBeInTheDocument();
+  });
 });

@@ -750,6 +750,11 @@
         "videos": "Videos",
         "people": "People"
     },
+    "factorio": {
+        "players": "Players",
+        "time": "Time",
+        "evolution": "Evolution"
+    },
     "fileflows": {
         "queue": "Queue",
         "processing": "Processing",
